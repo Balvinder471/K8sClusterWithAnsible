@@ -1,0 +1,7 @@
+ - hosts: tag_Name_master,tag_Name_slave
+   tasks:
+     - name: Installing docker in all nodes
+       package: 
+        name: docker
+        state: present 
+     

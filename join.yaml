@@ -1,0 +1,1 @@
+cmmnd : "kubeadm join 172.31.41.51:6443 --token 7qu0vj.atvrdju08md2ske9     --discovery-token-ca-cert-hash sha256:8ddfed8599360da67675891fb932a8a20d4d64038564a3a3514dfccaaf1f0fe3"

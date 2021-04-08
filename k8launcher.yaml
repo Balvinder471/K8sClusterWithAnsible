@@ -1,0 +1,51 @@
+- name : "Provisioning Kubernetes Nodes"
+  hosts : localhost
+  gather_facts : false
+
+  vars_files :
+    - ../key.yaml
+
+  vars_prompt : 
+    - name : cnt
+      prompt : "Enter the no of Slaves to launch "
+      private : no 
+
+  tasks : 
+    - name : "Provisioning Master Node"
+      ec2 :
+        key_name : "Mumbai-KP"
+        aws_access_key : "{{id}}"
+        aws_secret_key : "{{secret}}"
+        image : "ami-0bcf5425cdc1d8a85"
+        count : 1
+        group_id : "sg-02ebe26c281141e4f"
+        assign_public_ip : yes
+        vpc_subnet_id : "subnet-0e656766"
+        instance_type : "t2.micro"
+        state : present
+        region : "ap-south-1"
+        wait : yes
+        instance_tags :
+          Name : master
+   
+
+  
+    - name : "Provisioning slave nodes"
+      ec2 :
+        key_name : "Mumbai-KP"
+        aws_access_key : "{{id}}"
+        aws_secret_key : "{{secret}}"
+        image : "ami-0bcf5425cdc1d8a85"
+        count : "{{cnt}}"
+        group_id : "sg-02ebe26c281141e4f"
+        assign_public_ip : yes
+        vpc_subnet_id : "subnet-0e656766"
+        instance_type : "t2.micro"
+        state : present
+        region : "ap-south-1"
+        wait : yes
+        instance_tags :
+          Name : slave
+            
+         
+    
